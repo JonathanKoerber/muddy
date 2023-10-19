@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { View, FlatList } from "react-native";
+import { View, Text, FlatList } from "react-native";
 import { Card } from "../components/Card";
-import AppLoading from "expo-app-loading";
+import * as SplashScreen  from "expo-splash-screen";
 import { requestBase } from "../utils/constants";
 
+SplashScreen.preventAutoHideAsync();
 export const ListOfCards = () => {
-  const [cardList, setCardList] = useState(null);
+  const [cardList, setCardList] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   async function fetchCardData() {
     const response = await fetch(requestBase + "/home.json");
@@ -13,16 +15,27 @@ export const ListOfCards = () => {
   }
 
   useEffect(() => {
+    const loadCards = async () => {
+     try { 
     fetchCardData();
+     }catch (error){
+       console.log("Error loading cards:",error);
+     }finally{
+        SplashScreen.hideAsync();
+        setLoading(false);
+     }
+    };
+    loadCards();
   }, []);
 
-  if (!cardList) {
-    return <AppLoading />;
+  if (loading) {
+    return <View><Text>Loading ... </Text></View>;
   }
 
   const renderItem = ({ item }) => {
     return <Card item={item} />;
   };
+
   return (
     <View
       style={{

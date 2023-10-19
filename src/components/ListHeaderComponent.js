@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Pressable } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import { LinearGradient } from "expo-linear-gradient";
+import { LinearGradient } from 'expo-linear-gradient';
 
 export const ListHeaderComponent = () => {
   return (

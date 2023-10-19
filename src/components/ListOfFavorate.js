@@ -1,26 +1,29 @@
 import React, { useState, useEffect } from "react";
 import { View, FlatList } from "react-native";
 import { Card } from "../components/Card";
-import AppLoading from "expo-app-loading";
+import * as SplashScreen from "expo-splash-screen";
 import { requestBase } from "../utils/constants";
+import { useSelector } from "react-redux";
+
+SplashScreen.preventAutoHideAsync();
 
 export const ListOfFavorites = () => {
-  const [cardList, setCardList] = useState(null);
-
-  async function fetchCardData() {
-    const response = await fetch(requestBase + "/home.json");
-    setCardList(await response.json());
+  const {linkedImages} = useSelector((state) => state.linkedImages);
+  const [imageList, setImageList] = useState([]);
+  
+  
+  if (linkedImages === null) {
+    return <View><Text>Loading ... </Text></View>;
   }
 
   useEffect(() => {
-    fetchCardData();
-  }, []);
+    const reversedImages = [...likedImages].reverse();
+    setImageList(reversedImages);
+  }, [likedImages]);
 
-  if (!cardList) {
-    return <AppLoading />;
-  }
+ 
   const renderItem = ({ item }) => {
-    return <Card item={item} />;
+    return <Card item={item} navigation={navigation} />;
   };
   return (
     <View
@@ -29,7 +32,7 @@ export const ListOfFavorites = () => {
       }}
     >
       <FlatList
-        data={cardList.reverse()}
+        data={imageList}
         renderItem={renderItem}
         keyExtractor={(item) => item.itemId}
         showsVerticalScrollIndicator={false}

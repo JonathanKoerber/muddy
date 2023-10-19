@@ -1,24 +1,35 @@
 import React, { useState, useEffect } from "react";
 import { View, FlatList, Text, StyleSheet } from "react-native";
-import AppLoading from "expo-app-loading";
+import * as SplashScreen from "expo-splash-screen";
 import { requestBase } from "../utils/constants";
 
+SplashScreen.preventAutoHideAsync();
 export const ListOfMessages = ({ conversationId }) => {
-  const [messages, setMessages] = useState(null);
-
-  async function fetchMessages() {
-    const response = await fetch(
-      requestBase + "/messages/" + conversationId + ".json"
-    );
-    setMessages(await response.json());
-  }
+  
+  const [messages, setMessages] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchMessages();
+    const fetchAndLoadMessages = async () => {
+      try {
+        const response = await fetch(requestBase + "/messages/" + conversationId + ".json");
+        const messages = await response.json();
+        setMessages(messages);
+      } catch (error) {
+        console.log("Error loading messages:", error);
+      } finally {
+        SplashScreen.hideAsync();
+        setLoading(false);
+      }
+    };
+  
+    fetchAndLoadMessages();
   }, []);
-  if (!messages) {
-    return <AppLoading />;
-  }
+  
+  
+  if(loading) {
+    return <View><Text>Loading ... </Text></View>;
+  } 
 
   const renderItem = ({ item }) => {
     return (

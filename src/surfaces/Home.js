@@ -1,5 +1,5 @@
 import "react-native-gesture-handler";
-import React from "react";
+import React, { useEffect } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Feed } from "./Feed";
 import { Profile } from "./Profile";
@@ -8,12 +8,21 @@ import { AddPost } from "./AddPost";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { colors } from "../styles/colors";
 import { View } from "react-native";
+import { fetchLikedImages } from "../../asyncFetches";
+import { useDispatch } from "react-redux";
 
 const Tab = createBottomTabNavigator();
 
 const ConversationsBase = () => <View style={{ flex: 1 }} />;
 
 export const Home = () => {
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchLikedImages());
+  }, []);
+
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
@@ -31,7 +40,7 @@ export const Home = () => {
           return <Ionicons name={iconName} size={size} color={color} />;
         },
         tabBarActiveTintColor: colors.accentStroke,
-        tabBarInactiveTintColor: colors.black,
+        tabBarInactiveTintColor: colors.purple,
         tabBarShowLabel: false,
         headerTransparent: true,
         headerTitleAlign: "left",
@@ -52,7 +61,8 @@ export const Home = () => {
         component={ConversationsBase}
         options={{
           tabBarIcon: ({ size }) => (
-            <Ionicons name='chatbox-outline' color='#000000' size={size} />
+            <MaterialIcons name="assignment" size={24} color="#A100FF" />
+            // <Ionicons name='chatbox-outline' color='#000000' size={size} />
           ),
         }}
         listeners={({ navigation }) => ({
@@ -75,7 +85,7 @@ export const Home = () => {
               <View
                 style={{
                   position: "absolute",
-                  backgroundColor: "#000000",
+                  backgroundColor: "#A100FF",
                   padding: 30,
                   bottom: -10,
                   left: -13,
@@ -87,7 +97,7 @@ export const Home = () => {
                   shadowRadius: 4,
                 }}
               />
-              <Ionicons name='add-circle-outline' color='#ffffff' size={36} />
+              <MaterialCommunityIcons name="brain" size={34} color="#5EFF00" />
             </View>
           ),
         }}

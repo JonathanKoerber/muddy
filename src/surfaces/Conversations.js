@@ -1,27 +1,44 @@
-import React from "react";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { View, Text } from "react-native";
-import { useHeaderHeight } from "@react-navigation/elements";
-
-export const Conversations = () => {
-    const headerHight = useHeaderHeight();
-    return  (
-        <SafeAreaView style= {{ flex: 1, paddingTop: headerHight}}>
-        <View> 
-            <Text> Profile </Text>
-        </View>
-        </SafeAreaView>
-    );
-}import React from "react";
-import { View, TextInput, Pressable } from "react-native";
+import React, { useState, useEffect } from "react";
+import { View, Text, TextInput, Pressable } from "react-native";
 import { useHeaderHeight } from "@react-navigation/elements";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { ListOfConvos } from "../components/ListOfConvos";
+import * as SplashScreen from "expo-splash-screen";
+import { requestBase } from "../utils/constants";
 
+SplashScreen.preventAutoHideAsync();
 export const Conversations = ({ navigation }) => {
   const headerHeight = useHeaderHeight();
-  const [text, onChangeText] = React.useState();
+  const [text, onChangeText] = useState();
+  const [loading, setLoading] = useState(true);
+
+  const [conversationsList, setConversationsList] = useState(null);
+
+  async function fetchConversationData() {
+    const response = await fetch(requestBase + "/conversations.json");
+    setConversationsList(await response.json());
+  }
+
+  useEffect(() => {
+    const loadConversations = async () => {
+      try {
+        const response = await fetch(requestBase + "/conversations.json");  
+        setConversationsList(await response.json());
+      } catch (error) {
+        console.log("Error loading conversations:", error);
+        setLoading(true);
+      } finally {
+        SplashScreen.hideAsync();
+        setLoading(false);
+      }
+    }
+    loadConversations();
+  }, []);
+
+  if(loading){
+    return <View><Text>Loading..</Text></View>;
+  }
 
   return (
     <SafeAreaView style={{ flex: 1, paddingTop: headerHeight - 30 }}>
@@ -77,6 +94,7 @@ export const Conversations = ({ navigation }) => {
               shadowOffset: { width: 0, height: 4 },
               shadowOpacity: 0.1,
               shadowRadius: 9,
+              elevation: 3,
             }}
             onChangeText={onChangeText}
             value={text}
@@ -89,7 +107,10 @@ export const Conversations = ({ navigation }) => {
             style={{ position: "absolute", left: 28, top: 6 }}
           />
         </View>
-        <ListOfConvos navigation={navigation} />
+        <ListOfConvos
+          navigation={navigation}
+          conversationsList={conversationsList}
+        />
         <Pressable
           onPress={() => console.log("pressed the convo button")}
           style={{
@@ -118,4 +139,4 @@ export const Conversations = ({ navigation }) => {
       </View>
     </SafeAreaView>
   );
-};
+}

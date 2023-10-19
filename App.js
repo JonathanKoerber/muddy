@@ -6,7 +6,7 @@ import { Login } from "./src/surfaces/Login";
 import { Home } from "./src/surfaces/Home";
 import { ConversationsNavigation } from "./src/surfaces/ConversationsNavigation";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import AppLoading from "expo-app-loading";
+import * as SplashScreen from 'expo-splash-screen';
 import {
   useFonts,
   Poppins_400Regular,
@@ -14,6 +14,8 @@ import {
 } from "@expo-google-fonts/poppins";
 import { requestBase } from "./src/utils/constants";
 import { UserListContext } from "./src/context";
+
+SplashScreen.preventAutoHideAsync();
 
 const Stack = createStackNavigator();
 
@@ -43,14 +45,11 @@ export default function App() {
     fetchUserData();
   }, []);
 
-  if (!fontsLoaded) {
-    return <AppLoading />;
+  if (!fontsLoaded || !userList) {
+    SplashScreen.preventAutoHideAsync();
   }
 
-  if (!userList) {
-    return <AppLoading />;
-  }
-
+ 
   return (
     <SafeAreaProvider>
       <UserListContext.Provider value={{ userList: userList }}>

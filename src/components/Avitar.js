@@ -1,27 +1,21 @@
-import React, { useState, useEffect } from "react";
+import React, { useRef, useEffect } from "react";
 import { View, FlatList, Image, useWindowDimensions } from "react-native";
-import { requestBase } from "../utils/constants";
+import { useBookmarks, useUserState } from "../context";
 
-export const AddedImages = () => {
+export const BookmarkedImages = () => {
   const imageWidth = useWindowDimensions().width * 0.4;
-  const [addedImagesData, setAddedImagesData] = useState(null);
-  async function fetchAddedImagesData() {
-    const response = await fetch(requestBase + "/john_doe/addedImages.json");
-    setAddedImagesData(await response.json());
-  }
+  const userState = useUserState();
+  const { bookmarksData } = useBookmarks(userState);
+  const flatListRef = useRef(null);
 
-  useEffect(() => {
-    if (!addedImagesData) {
-      fetchAddedImagesData();
-    }
-  }, [addedImagesData]);
+  const ITEM_HEIGHT = 130;
 
   const renderItem = ({ item }) => {
     return (
       <Image
         style={{
           width: imageWidth,
-          height: 220,
+          height: ITEM_HEIGHT,
           borderRadius: 20,
           marginBottom: 32,
           borderColor: "#000000",
@@ -37,15 +31,21 @@ export const AddedImages = () => {
       style={{
         paddingHorizontal: 20,
         paddingTop: 20,
+        marginBottom: 400,
       }}
     >
       <FlatList
-        data={addedImagesData}
+        data={bookmarksData}
+        ref={flatListRef}
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
         showsVerticalScrollIndicator={false}
-        snapToInterval={240}
-        decelerationRate='fast'
+        inverted
+        getItemLayout={(data, index) => ({
+          length: ITEM_HEIGHT,
+          offset: ITEM_HEIGHT * index,
+          index,
+        })}
       />
     </View>
   );

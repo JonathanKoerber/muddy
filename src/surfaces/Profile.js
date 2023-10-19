@@ -3,7 +3,7 @@ import { View, Text, Image } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { ProfileStatistics } from "../components/ProfileStatistics";
 import { AddedImages } from "../components/AddedImages";
-import { FavoritedImages } from "../components/FavoritedImages";
+import { BookmarkedImages } from "../components/BookmarkedImages";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
 export const Profile = () => {
@@ -79,7 +79,7 @@ export const Profile = () => {
               alignSelf: "center",
             }}
             source={{
-              uri: "https://raw.githubusercontent.com/PacktPublishing/Simplifying-State-Management-in-React-Native/cd04c474053275d4e22a8173695a2b972d012567/chapter-4/assets/avatars/3.png",
+              uri: "https://raw.githubusercontent.com/PacktPublishing/Simplifying-State-Management-in-React-Native/chapter-3/assets/avatars/3.png",
             }}
           />
         </View>
@@ -120,7 +120,7 @@ export const Profile = () => {
         </View>
         <View style={{ alignItems: "center" }}>
           <Ionicons name='bookmark-outline' color='#000000' size={30} />
-          <FavoritedImages />
+          <BookmarkedImages />
         </View>
       </View>
     </SafeAreaView>

@@ -15,8 +15,8 @@ export const Feed = () => {
           zIndex: 100,
         }}
       />
-      <ListOfAvatars />
-      <ListOfCards />
+      <ListOfAvatars navigation={navigation}/>
+      <ListOfCards navigation={navigation}/>
     </SafeAreaView>
   );
 };
