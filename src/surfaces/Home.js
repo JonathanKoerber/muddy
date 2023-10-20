@@ -4,8 +4,9 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Feed } from "./Feed";
 import { Profile } from "./Profile";
 import { Favorites } from "./Favorites";
-import { AddPost } from "./AddPost";
+import { CreateAssignment } from "./CreateAssignment";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { colors } from "../styles/colors";
 import { View } from "react-native";
 import { fetchLikedImages } from "../../asyncFetches";
@@ -61,8 +62,8 @@ export const Home = () => {
         component={ConversationsBase}
         options={{
           tabBarIcon: ({ size }) => (
-            <MaterialIcons name="assignment" size={24} color="#A100FF" />
-            // <Ionicons name='chatbox-outline' color='#000000' size={size} />
+           // <MaterialIcons name="assignment" size={24} color="#A100FF" />
+             <Ionicons name='chatbox-outline' color='#000000' size={size} />
           ),
         }}
         listeners={({ navigation }) => ({
@@ -73,9 +74,10 @@ export const Home = () => {
         })}
       />
       <Tab.Screen
-        name='AddPost'
-        component={AddPost}
+        name='CreateAssignment'
+        component={CreateAssignment}
         options={{
+            headerShown: false,
           tabBarIcon: ({ size }) => (
             <View
               style={{

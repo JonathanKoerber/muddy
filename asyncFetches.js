@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { requestBase } from "./utils/constants";
+import { requestBase } from "./src/utils/constants";
 
 export const fetchLikedImages = createAsyncThunk(
     "likedImages/initLikedImages",

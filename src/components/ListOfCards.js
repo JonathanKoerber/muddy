@@ -5,7 +5,7 @@ import * as SplashScreen  from "expo-splash-screen";
 import { requestBase } from "../utils/constants";
 
 SplashScreen.preventAutoHideAsync();
-export const ListOfCards = () => {
+export const ListOfCards = (navigation) => {
   const [cardList, setCardList] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -33,7 +33,7 @@ export const ListOfCards = () => {
   }
 
   const renderItem = ({ item }) => {
-    return <Card item={item} />;
+    return <Card item={item} navigation={navigation}/>;
   };
 
   return (

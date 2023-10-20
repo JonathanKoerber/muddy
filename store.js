@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 
-import { userReducer } from "./reducer/user"
-import likedImagesReducer from "./reducer/likedImages"
+import { userReducer } from "./reducers/user"
+import likedImagesReducer from "./reducers/likedImages"
 
 const store = configureStore({
     reducer: {
