@@ -1,52 +1,64 @@
-import {Camera, CameraType} from "expo-camera";
-import {useEffect, useState} from 'react';
-import { Button, StyleSheet, View, TouchableOpacity, Text }  from "react-native";
+import React, { useState, useEffect } from 'react';
+import { Text, View, TouchableOpacity } from 'react-native';
+import { Camera } from 'expo-camera';
+import * as ImagePicker from 'expo-image-picker';
+import Tesseract from 'tesseract.js';
 
-export const AppCamera = () => {
-
-    const [ type, setType ] = useState(CameraType.back);
-    const [ permission, setPermission ] = useState(null);
+export const AppCamera = () =>{
+    const [hasCameraPermission, setHasCameraPermission] = useState(null);
+    const [imageUri, setImageUri] = useState(null);
 
     useEffect(() => {
         (async () => {
             const { status } = await Camera.requestCameraPermissionsAsync();
-            setPermission(status === "granted");
+            setHasCameraPermission(status === 'granted');
         })();
     }, []);
 
+    const pickImage = async () => {
+        const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+        if (status !== 'granted') {
+            console.log('Media library permission not granted');
+            return;
+        }
 
-    if (permission === null) {
-        return <Text>Requesting for camera permission</Text>;
-    }
-    if (permission === false) {
-        //ask for permission
-        return <Text>No access to camera</Text>;
-    }
-    const toggleType = () => {
-        setType(
-            type === CameraType.back
-            ? CameraType.front
-            : CameraType.back
-        );
-    }
+        const result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.Images,
+            allowsEditing: true,
+            aspect: [4, 3],
+            quality: 1,
+        });
+
+        if (!result.canceled){
+            setImageUri(result.assets[0].uri);
+        }
+    };
+
+    const processImage = async () => {
+        if (imageUri) {
+            const { data: { text } } = await Tesseract.recognize(imageUri);
+            console.log('OCR Result:', text);
+        }
+    };
+
     return (
-        <View style={{ flex: 1 }}>
-            <Camera style={{ flex: 1 }} type={type}>
-                <View style={{ flex: 1, backgroundColor: 'transparent', flexDirection: 'row' }}>
-                    <TouchableOpacity
-                        style={{
-                            flex: 0.1,
-                            alignSelf: 'flex-end',
-                            alignItems: 'center',
-                        }}
-                        onPress={toggleType}
-                    >
-                        <Text style={{ fontSize: 18, marginBottom: 10, color: 'white' }}>Flip</Text>
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+            {hasCameraPermission === null ? (
+                <Text>Requesting camera permission...</Text>
+            ) : hasCameraPermission === false ? (
+                <Text>No access to camera</Text>
+            ) : (
+                <>
+                    <TouchableOpacity onPress={pickImage}>
+                        <Text>Choose Image</Text>
                     </TouchableOpacity>
-                </View>
-            </Camera>
+                    {imageUri && (
+                        <TouchableOpacity onPress={processImage}>
+                            <Text>Process Image</Text>
+                        </TouchableOpacity>
+                    )}
+                </>
+            )}
         </View>
     );
-};
-
-
+}
