@@ -1,0 +1,3 @@
+CREATE DATABASE assessment_db;
+CREATE USER AB_user WITH PASSWORD 'pass';
+GRANT ALL PRIVILEGES ON DATABASE assessment_db TO AB_user;

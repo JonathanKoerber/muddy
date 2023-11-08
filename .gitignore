@@ -19,7 +19,8 @@ web-build/
 
 # Metro
 .metro-health-check*
-
+# DB
+postgres*
 # debug
 npm-debug.*
 yarn-debug.*
@@ -33,4 +34,5 @@ yarn-error.*
 .env*.local
 
 # typescript
-*.tsbuildinfo
+*.tsbuildinf
+venv-backend-assignment/*
