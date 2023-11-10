@@ -110,6 +110,8 @@ ENV/
 env.bak/
 venv.bak/
 venv-backend-assignment/
+venv-bkend/
+venv-bkend-assignment/
 
 # Spyder project settings
 .spyderproject
