@@ -38,9 +38,14 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
+    "rest_framework_simplejwt",
     "core",
     "core.user",
+    "core.post",
+    "core.comment",
 ]
+
+DEFAULT_AVATAR_URL = "https://gravatar.com/avatar/47f265cf9f234914e183e92908d40b44?s=400&d=robohash&r=x"
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -51,6 +56,14 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
+
+REST_FRAMEWORK = {
+   'DEFAULT_AUTHENTICATION_CLASSES': (
+       'rest_framework_simplejwt.authentication.JWTAuthentication',
+   ),
+   'DEFAULT_FILTER_BACKENDS':
+     ['django_filters.rest_framework.DjangoFilterBackend'],
+}
 
 ROOT_URLCONF = "assignment_backend.urls"
 
