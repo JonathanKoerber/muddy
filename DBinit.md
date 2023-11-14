@@ -22,3 +22,5 @@ If you see muddy-db-image then try to signin.
 ```
 psql -h localhost -U AB_user -d assessment_db -W
 ```
+
+Now exit the containers terminal interactive season 
