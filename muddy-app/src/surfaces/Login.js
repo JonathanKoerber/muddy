@@ -1,16 +1,19 @@
 import React, { useState } from "react";
-import { View, TextInput, Pressable } from "react-native";
+import { View, TextInput, Pressable, Text } from "react-native";
 import { useHeaderHeight } from "@react-navigation/elements";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
-export const Login = (props) => {
+export const Login = ({props}) => {
   const headerHeight = useHeaderHeight();
-  const [login, onChangeLogin] = useState();
-  const [password, onChangePassword] = useState();
+  const [login, onChangeLogin] = useState('');
+  const [password, onChangePassword] = useState('');
+
+  
 
   return (
     <SafeAreaView style={{ flex: 1, paddingTop: headerHeight }}>
+      
       <View style={{}}>
         <View style={{ marginBottom: 30 }}>
           <TextInput

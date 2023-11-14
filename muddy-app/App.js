@@ -51,7 +51,7 @@ export default function App() {
           <Stack.Navigator>
             <Stack.Group>
               { !loggedIn ? (
-                <Stack.Screen name="Login" component={Login} props={setLoggedIn}/>
+                <Stack.Screen name="Login" component={Login} props={setLoggedIn} />
               ) : (
                 <>
                   <Stack.Screen
