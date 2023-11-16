@@ -6,7 +6,7 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import { useDispatch } from "react-redux";
 import * as SecureStore from "expo-secure-store";
 import axios from "axios";
-import {TOCKEN_KEY, API_URL_BASE} from "../utils/constants";
+import {TOCKEN_KEY, LOGIN_URL_BASE} from "../utils/constants";
 
 export const Login = () => {
   const dispatch = useDispatch();
@@ -17,8 +17,8 @@ export const Login = () => {
 // axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;  
   const login = async (username, password) => {
     try{
-    const response = await axios.post(`${API_URL_BASE}/login/`, { "password": password, "username": username});
-    dispatch({type: "login", payload: response.data});
+    const response = await axios.post({LOGIN_URL_BASE}, { "password": password, "username": username});
+    // dispatch({type: "login", payload: response.data});
     await SecureStore.setItemAsync(TOCKEN_KEY, response.data.token);
     }catch(e){
       console.log(e);

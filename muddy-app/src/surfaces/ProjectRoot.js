@@ -37,7 +37,7 @@ export const ProjectRoot = () =>{
   useEffect(() => {
     setLoggedIn(userLoggedIn)
   }, [userLoggedIn]);
-
+  console.log("loggedIn", loggedIn)
   console.log("userLoggedIn", userLoggedIn)
   let [fontsLoaded] = useFonts({
     Poppins_400Regular,
@@ -53,7 +53,7 @@ export const ProjectRoot = () =>{
         <NavigationContainer theme={MyTheme}>
           <Stack.Navigator>
             <Stack.Group>
-            { !loggedIn ? (
+            { loggedIn ? (
                 <Stack.Screen name="Login" component={Login}  />
               ) : (
                 <>

@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     "rest_framework_simplejwt",
+    "django_extensions",
     "core",
     "core.user",
     "core.post",
@@ -95,7 +96,9 @@ DATABASES = {
         "NAME": "assessment_db",
         "USER": "AB_user",
         "PASSWORD": "pass",
-        "HOST": "db",
+        # Change this line to localhost if you want to connect
+        # Change to db if you want to connect to docker container
+        "HOST": "localhost",
         "PORT": "5432",
     }
 }
