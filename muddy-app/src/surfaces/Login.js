@@ -3,14 +3,28 @@ import { View, TextInput, Pressable, Text } from "react-native";
 import { useHeaderHeight } from "@react-navigation/elements";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import { useDispatch } from "react-redux";
+import * as SecureStore from "expo-secure-store";
+import axios from "axios";
+import {TOCKEN_KEY, API_URL_BASE} from "../utils/constants";
 
-export const Login = ({props}) => {
+export const Login = () => {
+  const dispatch = useDispatch();
   const headerHeight = useHeaderHeight();
-  const [login, onChangeLogin] = useState('');
+  const [username, onChangeUsername] = useState('');
   const [password, onChangePassword] = useState('');
 
-  
-
+// axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;  
+  const login = async (username, password) => {
+    try{
+    const response = await axios.post(`${API_URL_BASE}/login/`, { "password": password, "username": username});
+    dispatch({type: "login", payload: response.data});
+    await SecureStore.setItemAsync(TOCKEN_KEY, response.data.token);
+    }catch(e){
+      console.log(e);
+    }
+    
+  };
   return (
     <SafeAreaView style={{ flex: 1, paddingTop: headerHeight }}>
       
@@ -30,9 +44,9 @@ export const Login = ({props}) => {
               shadowRadius: 9,
               elevation: 3,
             }}
-            onChangeText={onChangeLogin}
-            value={login}
-            placeholder='login'
+            onChangeText={onChangeUsername}
+            value={username}
+            placeholder='username'
           />
         </View>
         <View>
@@ -63,7 +77,7 @@ export const Login = ({props}) => {
         </View>
       </View>
       <Pressable
-        onPress={() => console.log("trying to log in")}
+        onPress={() => login(username, password)}
         style={{
           position: "absolute",
           bottom: 300,
