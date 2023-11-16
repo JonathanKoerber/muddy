@@ -20,6 +20,7 @@ import {
 import store from "./store";
 import { Provider } from "react-redux";
 import {Text, View} from "react-native";
+import { ProjectRoot } from "./src/surfaces/ProjectRoot";
 
 const Stack = createStackNavigator();
 
@@ -47,40 +48,7 @@ export default function App() {
   return (
 <SafeAreaProvider>
       <Provider store={store}>
-        <NavigationContainer theme={MyTheme}>
-          <Stack.Navigator>
-            <Stack.Group>
-              { !loggedIn ? (
-                <Stack.Screen name="Login" component={Login} props={setLoggedIn}/>
-              ) : (
-                <>
-                  <Stack.Screen
-                    name="Home"
-                    component={Home}
-                    options={{ headerShown: false }}
-                  />
-                  <Stack.Screen
-                    name="ConversationsNav"
-                    component={ConversationsNavigation}
-                    options={{ headerShown: false }}
-                  />
-                </>
-              )}
-            </Stack.Group>
-            <Stack.Group screenOptions={{ presentation: "modal" }}>
-              <Stack.Screen
-                name="UserDetailsModal"
-                component={UserDetailsModal}
-                options={{ headerShown: false }}
-              />
-              <Stack.Screen
-                name="ImageDetailsModal"
-                component={ImageDetailsModal}
-                options={{ headerShown: false }}
-              />
-            </Stack.Group>
-          </Stack.Navigator>
-        </NavigationContainer>
+        <ProjectRoot />
       </Provider>
     </SafeAreaProvider>
   );

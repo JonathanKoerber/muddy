@@ -1,0 +1,46 @@
+version: '3'
+
+services:
+  # Django App
+  django:
+    build:
+      context: .
+      dockerfile: Dockerfile.django
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+
+  nginx:
+    build:
+      context: .
+      dockerfile: Dockerfile.nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - django
+    volumes:
+      - ./.secret:/etc/nginx/.secret
+    environment:
+      - NGINX_SSL_PASSPHRASE=password
+
+
+  # PostgreSQL Database
+  db:
+    build:
+      context: .
+      dockerfile: Dockerfile.db
+    environment:
+      POSTGRES_DB: assessment_db
+      POSTGRES_USER: AB_user
+      POSTGRES_PASSWORD: pass
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+volumes:
+  postgres-data:

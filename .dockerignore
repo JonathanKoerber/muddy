@@ -1,0 +1,38 @@
+# Exclude version control directories
+.git
+.svn
+
+# Exclude unnecessary files and directories
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+db.sqlite3
+node_modules
+.env
+
+# Exclude development and build artifacts
+*.log
+*.tmp
+*.swp
+*.swo
+*.vscode
+*.pyc
+*.pyo
+*.pyd
+
+# Exclude Docker-related files if applicable
+.dockerignore
+.docker
+.dockerignore
+Dockerfile.local
+Dockerfile.dev
+Dockerfile.prod
+.dockerignore.prod
+.dockerignore.local
+
+# Exclude editor-specific files
+.idea
+.vscode
+postgres
+muddy-app/

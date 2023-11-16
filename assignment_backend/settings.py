@@ -95,7 +95,7 @@ DATABASES = {
         "NAME": "assessment_db",
         "USER": "AB_user",
         "PASSWORD": "pass",
-        "HOST": "localhost",
+        "HOST": "db",
         "PORT": "5432",
     }
 }
@@ -119,6 +119,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+SECURE_SSL_REDIRECT = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
