@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import { View, TextInput, Pressable, Text } from "react-native";
 import { useHeaderHeight } from "@react-navigation/elements";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -6,7 +6,7 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import { useDispatch } from "react-redux";
 import * as SecureStore from "expo-secure-store";
 import axios from "axios";
-import {TOCKEN_KEY, LOGIN_URL_BASE} from "../utils/constants";
+import {TOCKEN_KEY, LOGIN_URL_BASE, URL} from "../utils/constants";
 
 export const Login = () => {
   const dispatch = useDispatch();
@@ -16,8 +16,22 @@ export const Login = () => {
 
 // axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;  
   const login = async (username, password) => {
+      console.log(LOGIN_URL_BASE, TOCKEN_KEY)
+      const ping = async () => {
+              try {
+                  const response = await axios.get(URL + "post/");
+                  console.log("ping")
+                  console.log(response.data)
+              } catch (err) {
+                  console.log("ping error")
+                  console.log(err);
+              }
+          };
+            ping();
     try{
-    const response = await axios.post({LOGIN_URL_BASE}, { "password": password, "username": username});
+    const response = await axios.post(LOGIN_URL_BASE, { "password": password, "username": username});
+    console.log("response")
+    console.log(response.data)
     // dispatch({type: "login", payload: response.data});
     await SecureStore.setItemAsync(TOCKEN_KEY, response.data.token);
     }catch(e){

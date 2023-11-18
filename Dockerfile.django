@@ -14,4 +14,7 @@ COPY . .
 EXPOSE 8000
 
 # Run the development server with SSL
-CMD ["python", "manage.py", "runserver_plus", "--cert-file", ".secret/cert.pem", "--key-file", ".secret/key.pem"]
+CMD ["python", "mange.py", "makemigrations
+"]
+CMD ["python", "mange.py", "migrate"]
+CMD ["python", "manage.py", "runserver_plus", "--cert-file", ".secret/cert.pem", "--key-file", ".secret/key.pem", "0.0.0.0:8000"]

@@ -53,7 +53,7 @@ export const ProjectRoot = () =>{
         <NavigationContainer theme={MyTheme}>
           <Stack.Navigator>
             <Stack.Group>
-            { loggedIn ? (
+            { true ? (
                 <Stack.Screen name="Login" component={Login}  />
               ) : (
                 <>
