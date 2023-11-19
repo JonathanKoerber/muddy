@@ -1,14 +1,216 @@
-# Byte-compiled / optimized / DLL files
-__pycache__/*
+# Expo
+.expo
+__generated__
+web-build
+bare-apps
+
+# macOS
+.DS_Store
+
+# Node
+node_modules
+npm-debug.log
+yarn-error.log
+
+# Ruby
+.direnv
+
+# Env
+.envrc.local
+
+# Emacs
+*~
+
+# Vim
+.*.swp
+.*.swo
+.*.swn
+.*.swm
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Xcode
+*.pbxuser
+!default.pbxuser
+*.xccheckout
+*.xcscmblueprint
+xcuserdata
+
+# IDEA / Android Studio
+*.iml
+.gradle
+.idea
+
+# Eclipse
+.project
+.settings
+
+# VSCode
+.history/
+/vscode/launch.json
+
+# Android
+*.apk
+*.hprof
+/android/**/build
+/android/**/.cxx
+/android/**/local.properties
+/android/captures
+/android/expoview/libs/ReactAndroid-temp
+/android/versioned-react-native/packages
+/android/versioned-react-native/ReactAndroid
+ReactAndroid-temp.aar
+/android/prebuiltHermes
+/android/versioned-abis/**/*.aar
+
+# Tools
+jarjar-rules.txt
+
+# Dynamic Macros
+/ios/Exponent/Supporting/EXBuildConstants.plist.bak
+/ios/Exponent/Supporting/EXBuildConstants.plist.json
+/ios/Exponent/Supporting/EXBuildConstants.plist
+/ios/Exponent/Supporting/GoogleService-Info.plist
+/ios/Exponent/Supporting/Info.plist.bak
+/ios/Exponent/Supporting/Info.plist.json
+/android/expoview/src/main/java/host/exp/exponent/generated/ExponentBuildConstants.java
+/android/app/src/androidTest/java/host/exp/exponent/generated/TestBuildConstants.java
+.kernel-ngrok-url
+
+# Template files
+/android/app/src/main/AndroidManifest.xml
+/android/app/google-services.json
+/apps/bare-expo/android/app/google-services.json
+/apps/bare-expo/ios/BareExpo/GoogleService-Info.plist
+/ios/Exponent/Generated/EXKeys.h
+/ios/ExponentIntegrationTests/EXTestEnvironment.plist
+/exponent-view-template/ios/Podfile
+
+# Template projects
+templates/**/android/**/generated/*
+templates/**/android/app/build
+templates/**/Pods/**
+templates/**/Podfile.lock
+templates/**/yarn.lock
+templates/**/*.tgz
+
+# EYW template
+/packages/expo-yarn-workspaces/workspace-template/yarn.lock
+
+# Codemod
+.codemod.bookmark
+
+# Fastlane
+/*.cer
+/fastlane/report.xml
+/fastlane/Preview.html
+/fastlane/Deployment
+/fastlane/test_output
+/Preview.html
+/gc_keys.json
+/fastlane/gc_keys.json
+
+# CI
+/android/logcat.txt
+
+# Shell apps
+android-shell-app
+shellAppBase-*
+shellAppIntermediates
+shellAppWorkspaces
+/artifacts/*
+
+# Expo Client builds
+/client-builds
+
+# Expo web env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+apps/bare-expo/deploy-url.txt
+
+# Temporary files created by Metro to check the health of the file watcher
+.metro-health-check*
+
+# Expo Doc merging
+docs/pages/versions/*/react-native/ADDED_*.md
+docs/pages/versions/*/react-native/REMOVED_*.md
+docs/pages/versions/*/react-native/*.diff
+
+# Home
+/home/dist
+
+# Prebuilds
+/packages/**/*.xcframework
+/packages/**/*.spec.json
+/packages/**/Info-generated.plist
+!crsqlite.xcframework
+
+# iOS
+/ios/Pods
+/ios/build
+**/ios/.xcode.env.local
+/ios/versioned-react-native/*/ReactNative/sdks/hermes-engine/destroot
+
+################################################################################
+# DJango
+################################################################################
+# Django #
+*.log
+*.pot
+*.pyc
+__pycache__
+db.sqlite3
+media
+
+# Backup files #
+*.bak
+
+# If you are using PyCharm #
+# User-specific stuff
+.idea/**/workspace.xml
+.idea/**/tasks.xml
+.idea/**/usage.statistics.xml
+.idea/**/dictionaries
+.idea/**/shelf
+
+# AWS User-specific
+.idea/**/aws.xml
+
+# Generated files
+.idea/**/contentModel.xml
+
+# Sensitive or high-churn files
+.idea/**/dataSources/
+.idea/**/dataSources.ids
+.idea/**/dataSources.local.xml
+.idea/**/sqlDataSources.xml
+.idea/**/dynamic.xml
+.idea/**/uiDesigner.xml
+.idea/**/dbnavigator.xml
+
+# Gradle
+.idea/**/gradle.xml
+.idea/**/libraries
+
+# File-based project format
+*.iws
+
+# IntelliJ
+out/
+
+# JIRA plugin
+atlassian-ide-plugin.xml
+
+# Python #
 *.py[cod]
 *$py.class
-.expo/
-# C extensions
-*.so
 
 # Distribution / packaging
-.Python
-build/
+.Python build/
 develop-eggs/
 dist/
 downloads/
@@ -20,16 +222,9 @@ parts/
 sdist/
 var/
 wheels/
-pip-wheel-metadata/
-share/python-wheels/
 *.egg-info/
 .installed.cfg
 *.egg
-MANIFEST
-
-# PyInstaller
-#  Usually these files are written by a python script from a template
-#  before PyInstaller builds the exe, so as to inject date/other infos into it.
 *.manifest
 *.spec
 
@@ -40,67 +235,27 @@ pip-delete-this-directory.txt
 # Unit test / coverage reports
 htmlcov/
 .tox/
-.nox/
 .coverage
 .coverage.*
 .cache
+.pytest_cache/
 nosetests.xml
 coverage.xml
 *.cover
-*.py,cover
 .hypothesis/
-.pytest_cache/
-
-# Translations
-*.mo
-*.pot
-
-# Django stuff:
-*.log
-local_settings.py
-db.sqlite3
-db.sqlite3-journal
-postgres/ 
-# Flask stuff:
-instance/
-.webassets-cache
-
-# Scrapy stuff:
-.scrapy
-
-# Sphinx documentation
-docs/_build/
-
-# PyBuilder
-target/
 
 # Jupyter Notebook
 .ipynb_checkpoints
 
-# IPython
-profile_default/
-ipython_config.py
-
 # pyenv
 .python-version
 
-# pipenv
-#   According to pypa/pipenv#598, it is recommended to include Pipfile.lock in version control.
-#   However, in case of collaboration, if having platform-specific dependencies or dependencies
-#   having no cross-platform support, pipenv may install dependencies that don't work, or not
-#   install all needed dependencies.
-#Pipfile.lock
-
-# PEP 582; used by e.g. github.com/David-OConnor/pyflow
-__pypackages__/
-
-# Celery stuff
-celerybeat-schedule
-celerybeat.pid
+# celery
+celerybeat-schedule.*
 
 # SageMath parsed files
 *.sage.py
-.secret
+
 # Environments
 .env
 .venv
@@ -109,27 +264,39 @@ venv/
 ENV/
 env.bak/
 venv.bak/
-venv-backend-assignment/
 venv-bkend/
-venv-bkend-assignment/
-venv*
-# Spyder project settings
-.spyderproject
-.spyproject
-
-# Rope project settings
-.ropeproject
 
 # mkdocs documentation
 /site
 
 # mypy
 .mypy_cache/
-.dmypy.json
-dmypy.json
 
-# Pyre type checker
-.pyre/
+# Sublime Text #
+*.tmlanguage.cache
+*.tmPreferences.cache
+*.stTheme.cache
+*.sublime-workspace
+*.sublime-project
 
-# Pycharm
-.idea/
+# sftp configuration file
+sftp-config.json
+
+# Package control specific files Package
+Control.last-run
+Control.ca-list
+Control.ca-bundle
+Control.system-ca-bundle
+GitHub.sublime-settings
+
+# Visual Studio Code #
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history
+
+# Sectets
+
+.secret/
