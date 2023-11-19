@@ -9,7 +9,7 @@ export const Card = ({ item, navigation }) => {
   return (
     <Pressable
       onPress={() =>
-        navigation.navigate("ImageDetailsModal", { imageItem: item })
+        navigation.navigate("Worksheet", { imageItem: item })
       }
     >
       <Image

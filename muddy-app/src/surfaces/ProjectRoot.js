@@ -7,8 +7,8 @@ import { Home } from "./Home";
 import { UserDetailsModal } from "./UserDetailsModal";
 import { ImageDetailsModal } from "./ImageDetailsModal";
 import { ConversationsNavigation } from "./ConversationsNavigation";
-import { SafeAreaProvider } from "react-native-safe-area-context";
 import { useSelector, useDispatch } from "react-redux";
+import { Worksheet} from "../components/Worksheet";
 import * as SplashScreen from "expo-splash-screen";
 
 import {
@@ -34,6 +34,10 @@ export const ProjectRoot = () =>{
   const userLoggedIn = useSelector((state) => state.user.userLoggedIn )|| false;
   const [loggedIn, setLoggedIn] = useState(false);
 
+useEffect(() => {
+  // Prevent native splash screen from autohiding
+    SplashScreen.hideAsync();
+}, []);
   useEffect(() => {
     setLoggedIn(userLoggedIn)
   }, [userLoggedIn]);
@@ -49,26 +53,21 @@ export const ProjectRoot = () =>{
   }
 
   return (
-
         <NavigationContainer theme={MyTheme}>
           <Stack.Navigator>
             <Stack.Group>
-            { loggedIn ? (
-                <Stack.Screen name="Login" component={Login}  />
-              ) : (
-                <>
-                  <Stack.Screen
-                    name="Home"
-                    component={Home}
-                    options={{ headerShown: false }}
-                  />
+             <Stack.Screen
+                name="Home"
+                component={Home}
+                options={{ headerShown: false }}/>
+              {/*<Stack.Screen name="Login" component={Login}  />*/}
+
                   <Stack.Screen
                     name="ConversationsNav"
                     component={ConversationsNavigation}
                     options={{ headerShown: false }}
                   />
-                </>
-              )}
+
             </Stack.Group>
             <Stack.Group screenOptions={{ presentation: "modal" }}>
               <Stack.Screen
@@ -81,6 +80,9 @@ export const ProjectRoot = () =>{
                 component={ImageDetailsModal}
                 options={{ headerShown: false }}
               />
+              <Stack.Screen name={"Worksheet"}
+                            component={Worksheet}
+                            options={{headerShown: false}}/>
             </Stack.Group>
           </Stack.Navigator>
         </NavigationContainer>   

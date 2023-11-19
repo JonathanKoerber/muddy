@@ -1,10 +1,11 @@
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { View } from "react-native";
+import { View ,  Text} from "react-native";
 import { ListOfAvatars } from "../components/ListOfAvatars";
 import { ListOfCards } from "../components/ListOfCards";
+import {ListOfWorksheets} from "../components/ListOfWorksheets";
 
-export const Feed = (navigation) => {
+export const Feed = ({navigation}) => {
   return (
       <SafeAreaView style={{ flex: 1 }}>
           <View
@@ -15,8 +16,9 @@ export const Feed = (navigation) => {
                   zIndex: 100,
               }}
           />
-          <ListOfAvatars navigation={navigation} />
-          <ListOfCards navigation={navigation} />
+          {/*<ListOfAvatars navigation={navigation} />*/}
+            <ListOfWorksheets navigation={navigation} />
+            <ListOfCards navigation={navigation} />
       </SafeAreaView>
   );
 };

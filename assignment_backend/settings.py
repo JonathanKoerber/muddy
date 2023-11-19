@@ -25,7 +25,7 @@ SECRET_KEY = "django-insecure-uk^nprv79-fzwl!*p+0f%rk(#x4o-&0a5o!1ec&c$+ibyixil5
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['192.169.0.5', 'localhost', ]
 
 
 # Application definition
@@ -96,9 +96,7 @@ DATABASES = {
         "NAME": "assessment_db",
         "USER": "AB_user",
         "PASSWORD": "pass",
-        # Change this line to localhost if you want to connect
-        # Change to db if you want to connect to docker container
-        "HOST": "localhost",
+        "HOST": "db",
         "PORT": "5432",
     }
 }
@@ -149,3 +147,5 @@ STATIC_URL = "static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 AUTH_USER_MODEL = "core_user.User"
+
+
