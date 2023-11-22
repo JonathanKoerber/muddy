@@ -13,7 +13,8 @@ export const WORKSHEETS = [
             {'questionId': '1', 'question': '1 + 1 = ?', 'answer': '2'},
             {'questionId': '2', 'question': '1 + 2 = ?', 'answer': '3'},
             {'questionId': '3', 'question': '1 + 3 = ?', 'answer': '4'},
-            {'questionId': '4', 'question': '1 + 4 = ?', 'answer': '5'}
+            {'questionId': '4', 'question': '1 + 4 = ?', 'answer': '5'},
+            {'questionId': '5', 'question': '1 + 5 = ?', 'answer': '6'},
         ]
     },
     {
