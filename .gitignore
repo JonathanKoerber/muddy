@@ -133,7 +133,7 @@ dmypy.json
 
 # Pycharm
 .idea/
-##### REACT APP /muddy-app #####
+##### REACT APP /muddy-app ######
 # Expo
 /muddy-app/.expo
 /muddy-app/__generated__
