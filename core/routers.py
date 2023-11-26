@@ -3,6 +3,8 @@ from rest_framework import routers
 from core.post.viewsets import PostViewSet
 from core.user.viewsets import UserViewSet
 from core.auth.viewsets import RegisterViewSet, LoginViewSet, RefreshViewSet
+from core.worksheet.viewsets import WorksheetViewSet
+
 
 router = routers.SimpleRouter()
 
@@ -30,3 +32,19 @@ router.register(r'post', PostViewSet, basename='post')
 urlpatterns = [
     *router.urls,
 ]
+
+# ##################################################################### #
+# ################### WORKSHEET                  ###################### #
+# ##################################################################### #
+
+router.register(r'worksheet', WorksheetViewSet, basename='worksheet')
+
+urlpatterns = [
+    *router.urls,
+]
+
+# ##################################################################### #
+# ###################   ORC                      ###################### #
+# ##################################################################### #
+
+router.register(r'orc', OrcViewSet, basename='orc')
