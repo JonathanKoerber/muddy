@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "core.user",
     "core.post",
     "core.comment",
+    "core.worksheet",
 ]
 
 DEFAULT_AVATAR_URL = "https://gravatar.com/avatar/47f265cf9f234914e183e92908d40b44?s=400&d=robohash&r=x"
@@ -147,5 +148,4 @@ STATIC_URL = "static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 AUTH_USER_MODEL = "core_user.User"
-
 
