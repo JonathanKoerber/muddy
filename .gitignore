@@ -310,7 +310,6 @@ GitHub.sublime-settings
 /muddy-app/bare-apps
 
 # macOS
-.DS_Store
 
 # Node
 /muddy-app/node_modules
@@ -445,6 +444,8 @@ muddy-app/shellAppWorkspaces
 /muddy-app/docs/pages/versions/*/react-native/REMOVED_*.md
 /muddy-app/docs/pages/versions/*/react-native/*.diff
 
+#postgres db volume
+postgres/
 # Home
 /home/dist
 

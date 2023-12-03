@@ -1,3 +1,5 @@
+# Dockerfile.django
+
 FROM python:3.10
 
 # Set the working directory
@@ -10,10 +12,15 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy the application code
 COPY . .
 
+# RUN python manage.py makemigrations
+# RUN python manage.py migrate
+RUN python manage.py collectstatic --noinput
+
 # Expose the port used by the Django development server
 EXPOSE 8000
 
-# Run the development server with SSL
-CMD ["python", "mange.py", "makemigrations"]
-CMD ["python", "mange.py", "migrate"]
-CMD ["python", "manage.py", "runserver_plus", "--cert-file", ".secret/cert.pem", "--key-file", ".secret/key.pem", "0.0.0.0:8000"]
+# Run migrations and collect static files during the build
+CMD ["python", "manage.py", "makemigrations"]
+CMD ["python", "manage.py", "migrate"]
+# CMD ["python", "manage.py", "collectstatic", "--noinput"]
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]

@@ -35,4 +35,11 @@ Dockerfile.prod
 .idea
 .vscode
 postgres
-muddy-app/
+muddy-app
+node_modules
+npm-debug.log
+yarn-error.log
+.DS_Store
+.expo
+.expo-shared
+.vscode

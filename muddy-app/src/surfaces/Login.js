@@ -3,11 +3,10 @@ import { View, TextInput, Pressable, Text } from "react-native";
 import { useHeaderHeight } from "@react-navigation/elements";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import { login } from "../../reducers/userReducer"
 import { useDispatch, useSelector } from "react-redux";
-import * as SecureStore from "expo-secure-store";
-import axios  from "axios";
-import {TOCKEN_KEY, LOGIN_URL_BASE, URL} from "../utils/constants";
-import { login } from "../services/api";
+import { loginRequest } from "../services/djangoApi";
+import {catchRejection} from "@reduxjs/toolkit/src/listenerMiddleware/utils";
 
 export const Login = () => {
   const dispatch = useDispatch();
@@ -15,16 +14,13 @@ export const Login = () => {
   const [username, onChangeUsername] = useState('betty');
   const [password, onChangePassword] = useState('password');
 
-// axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
-
-
   const handleLogin = async () => {
-      console.log("########", "login", "########");
-      getImage()
-      login(username, password).then((res) => {
-          console.log("res", res);
-      });
-      // dispatch login action if it connect
+      console.log("########", "login", "login",  "########");
+     await loginRequest(username, password).then(function (user){
+         if(user !== undefined){
+             dispatch(login(user));
+         }
+     });
   };
 
   return (
