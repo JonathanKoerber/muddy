@@ -1,19 +1,6 @@
 version: '3'
 
 services:
-  django:
-    build:
-      context: .
-      dockerfile: Dockerfile.django
-    volumes:
-      - .:/app
-      - ./.secret:/app/.secret
-    ports:
-      - "8000:8000"
-    depends_on:
-      - db
-
-  # PostgreSQL Database
   db:
     build:
       context: .
@@ -26,6 +13,42 @@ services:
       - "5432:5432"
     volumes:
       - postgres-data:/var/lib/postgresql/data
+    networks:
+      - app-network
 
+  django:
+    build:
+      context: .
+      dockerfile: Dockerfile.django
+    volumes:
+      - .:/app
+      - ./.secret:/app/.secret
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    networks:
+      - app-network
+#    command: sh -c "python manage.py wait_for_db && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+
+  nginx:
+    build:
+      context: .
+      dockerfile: Dockerfile.nginx
+    volumes:
+      - ./.secret:/etc/nginx/.secret
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - django
+    networks:
+      - app-network
+
+# PostgreSQL Database
 volumes:
   postgres-data:
+
+networks:
+  app-network:
+    driver: bridge

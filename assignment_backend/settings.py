@@ -25,7 +25,7 @@ SECRET_KEY = "django-insecure-uk^nprv79-fzwl!*p+0f%rk(#x4o-&0a5o!1ec&c$+ibyixil5
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.169.0.5', 'localhost', ]
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -50,7 +50,6 @@ INSTALLED_APPS = [
 DEFAULT_AVATAR_URL = "https://gravatar.com/avatar/47f265cf9f234914e183e92908d40b44?s=400&d=robohash&r=x"
 
 MIDDLEWARE = [
-    "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -121,10 +120,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-SECURE_SSL_REDIRECT = True
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
-
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
@@ -140,7 +135,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = "static/"
+STATIC_URL = '/static/'
+STATIC_ROOT = '/app/static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
