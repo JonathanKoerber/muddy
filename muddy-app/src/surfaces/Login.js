@@ -5,7 +5,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { login } from "../../reducers/userReducer"
 import { useDispatch, useSelector } from "react-redux";
-import { loginRequest } from "../services/djangoApi";
+import { loginRequest, createPost } from "../services/djangoApi";
 import {catchRejection} from "@reduxjs/toolkit/src/listenerMiddleware/utils";
 
 export const Login = () => {
@@ -13,11 +13,15 @@ export const Login = () => {
   const headerHeight = useHeaderHeight();
   const [username, onChangeUsername] = useState('betty');
   const [password, onChangePassword] = useState('password');
-
+const post = () => {
+createPost(
+    "body A simple posted part two with not id")
+}
   const handleLogin = async () => {
       console.log("########", "login", "login",  "########");
      await loginRequest(username, password).then(function (user){
          if(user !== undefined){
+             console.log(user)
              dispatch(login(user));
          }
      });
@@ -26,7 +30,7 @@ export const Login = () => {
   return (
     <SafeAreaView style={{ flex: 1, paddingTop: headerHeight }}>
       
-      <View style={{}}>
+      <View style={{paddingTop: 60}}>
         <View style={{ marginBottom: 30 }}>
           <TextInput
             style={{
@@ -82,6 +86,7 @@ export const Login = () => {
           left: "43%",
         }}
       >
+
         <View
           style={{
             position: "absolute",
@@ -98,7 +103,7 @@ export const Login = () => {
           }}
         />
         <Ionicons name='paper-plane-outline' color='#ffffff' size={26} />
-      </Pressable>
+        </Pressable>
     </SafeAreaView>
   );
 };
