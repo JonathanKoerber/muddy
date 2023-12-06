@@ -4,6 +4,7 @@ from core.post.viewsets import PostViewSet
 from core.user.viewsets import UserViewSet
 from core.auth.viewsets import RegisterViewSet, LoginViewSet, RefreshViewSet
 from core.worksheet.viewsets import WorksheetViewSet
+from core.ocr.viewsets import OCRViewSet
 
 
 router = routers.SimpleRouter()
@@ -47,3 +48,8 @@ urlpatterns = [
 # ###################   ORC                      ###################### #
 # ##################################################################### #
 
+router.register(r'ocr', OCRViewSet, basename='ocr')
+
+urlpatterns = [
+    *router.urls,
+]

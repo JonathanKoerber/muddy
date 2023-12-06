@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, TouchableOpacity } from 'react-native';
+import { Text, View, TouchableOpacity, Platform } from 'react-native';
 import { Camera } from 'expo-camera';
 import * as ImagePicker from 'expo-image-picker';
+import { useSelector, useDispatch } from "react-redux";
+import { imageToWorksheet, createPost} from "../services/djangoApi";
 
 export const AppCamera = () =>{
+    const user = useSelector(state => state.user);
+
     const [hasCameraPermission, setHasCameraPermission] = useState(null);
     const [imageUri, setImageUri] = useState(null);
     const [text, setText] = useState(null);
@@ -14,7 +18,10 @@ export const AppCamera = () =>{
             setHasCameraPermission(status === 'granted');
         })();
     }, []);
-
+    const post = () => {
+        console.log(user.user.id);
+        createPost(user.user.id, "Creating post test with user id");
+    }
     const pickImage = async () => {
         const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
         if (status !== 'granted') {
@@ -30,13 +37,36 @@ export const AppCamera = () =>{
 
         if (!result.canceled){
             setImageUri(result.assets[0].uri);
+            console.log(result.assets[0].uri)
+            console.log("set image URI", imageUri)
         }
     };
 
     // const worker = createWorker('eng');
     const processImage = async () => {
-    // sent image https request to server return text
+        const imageFile = {
+            uri: imageUri,//Platform.OS === 'ios' ? imageUri.replace('file://', '') : imageUri,
+            type: 'image/png',
+            name: 'image.png'
+        };
 
+        const imageFormData = new FormData();
+        imageFormData.append('image', {
+            uri: Platform.OS === 'ios' ? imageUri.replace('file://', '') : imageUri,
+            type: 'image/png',
+            name: 'image.png'
+        });
+        imageFormData.append('author',user.user.id);
+        try {
+            // Wait for the result of the asynchronous operation
+            const worksheet = await imageToWorksheet(user.user.id, imageFormData);
+
+            // Use the result as needed
+            console.log(worksheet);
+        } catch (error) {
+            // Handle errors if needed
+            console.error("Error in processImage:", error);
+        }
     };
 
     return (

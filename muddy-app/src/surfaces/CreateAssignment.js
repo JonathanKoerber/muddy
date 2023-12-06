@@ -13,6 +13,7 @@ export const CreateAssignment = () => {
 
   return (
     <SafeAreaView style={{ flex: 1}}>
+
         <AppCamera />
     </SafeAreaView>
   );

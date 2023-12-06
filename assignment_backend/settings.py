@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     "core.post",
     "core.comment",
     "core.worksheet",
+    "core.ocr",
 ]
 
 DEFAULT_AVATAR_URL = "https://gravatar.com/avatar/47f265cf9f234914e183e92908d40b44?s=400&d=robohash&r=x"
