@@ -1,5 +1,7 @@
 from core.worksheet.models import Worksheet
 from django.core.serializers.json import DjangoJSONEncoder
+from PIL import Image
+import pytesseract
 from core.user.models import User
 import json
 
@@ -18,6 +20,8 @@ def image_to_text(author, image):
         ]
     }
 
+    test = pytesseract.image_to_string(Image.open(image))
+    print("test: ", test)
     body_json = json.dumps(worksheet_data, cls=DjangoJSONEncoder)
 
     user = User.objects.get(email=author.email)

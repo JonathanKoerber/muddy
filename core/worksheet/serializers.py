@@ -33,5 +33,5 @@ class WorksheetSerializer(AbstractSerializer):
     class Meta:
         model = Worksheet
         # List of all the fields that can be included in a request or a response
-        fields = ['id', 'author', 'body', 'edited', 'likes_count', 'created', 'updated']
+        fields = ['id', 'author', 'body', 'edited',  'created', 'updated']
         read_only_fields = ["edited"]

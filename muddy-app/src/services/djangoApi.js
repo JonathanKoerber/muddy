@@ -9,7 +9,7 @@ import header from "@react-navigation/stack/src/views/Header/Header";
 
 const djangoAPI = axios.create({
     baseURL: URL,
-    timeout: 1000,
+    timeout: 10000,
     httpsAgent: {
         rejectUnauthorized: false,
     }

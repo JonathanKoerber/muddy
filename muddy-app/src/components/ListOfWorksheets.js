@@ -2,11 +2,13 @@ import React, { useState, useEffect } from "react";
 import { View, Text, FlatList, TouchableOpacity } from "react-native";
 import { WORKSHEETS } from "../utils/constants";
 import { Worksheet } from "./Worksheet";
+import {useSelector} from "react-redux";
 
 
 export const ListOfWorksheets = ({ navigation }) => {
     const [loading, setLoading] = useState(true);
-    const listOfWorksheets = WORKSHEETS;
+    const listOfWorksheets = useSelector((state) => state.worksheets)| [];
+    //const listOfWorksheets = WORKSHEETS;
 
     useEffect(() => {
         if (listOfWorksheets) {
