@@ -32,6 +32,7 @@ export const ListOfWorksheets = ({ navigation }) => {
                 marginBottom: 32,
             }}>
                 <Text>{item.title}</Text>
+                <Text>{item.description}</Text>
             </View>
         </TouchableOpacity>
     );
