@@ -18,6 +18,7 @@ import {
 } from "@expo-google-fonts/poppins";
 
 import {Text, View} from "react-native";
+import { Register } from "./Register";
 
 const Stack = createStackNavigator();
 
@@ -57,11 +58,18 @@ useEffect(() => {
           <Stack.Navigator>
             <Stack.Group>
               {!userLoggedIn ? (
-                <Stack.Screen
-                  name="Login"
-                  component={Login}
-                  options={{ headerShown: false }}
-                />
+                <Stack.Group>
+                  <Stack.Screen
+                    name="Login"
+                    component={Login}
+                    options={{ headerShown: false }}
+                  />
+                  <Stack.Screen
+                    name="Register"
+                    component={Register}
+                    options={{ headerShow: false }}
+                  />
+                </Stack.Group>
               ):(
                   <>
              <Stack.Screen

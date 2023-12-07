@@ -36,9 +36,11 @@ export const Home = () => {
 
           if (route.name === "Feed") {
             iconName = focused ? "md-home" : "md-home-outline";
+          } else if (route.name === "ConversationsMain") {
+            iconName = focused ? "chatbox" : "chatbox-outline";
           } else if (route.name === "Favorites") {
             iconName = focused ? "heart" : "heart-outline";
-          } else if (route.name === "Profile") {
+          } else if (route.name === "ProfileStack") {
             iconName = focused ? "person-circle" : "person-circle-outline";
           }
 
@@ -61,22 +63,7 @@ export const Home = () => {
       })}
     >
       <Tab.Screen name='Feed' component={Feed} />
-      <Tab.Screen
-        name='ConversationsMain'
-        component={ConversationsBase}
-        options={{
-          tabBarIcon: ({ size }) => (
-           // <MaterialIcons name="assignment" size={24} color="#A100FF" />
-             <Ionicons name='chatbox-outline' color='#000000' size={size} />
-          ),
-        }}
-        // listeners={({ navigation }) => ({
-        //   tabPress: (e) => {
-        //     e.preventDefault();
-        //     navigation.navigate("ConversationsNav");
-        //   },
-        //}
-        />
+      <Tab.Screen name='ConversationsMain' component={ConversationsBase} />
       <Tab.Screen
         name='CreateAssignment'
         component={CreateAssignment}
@@ -109,11 +96,7 @@ export const Home = () => {
         }}
       />
       <Tab.Screen name='Favorites' component={Favorites} />
-      <Tab.Screen
-        name='Profile'
-        component={Profile}
-        options={{ headerShown: false }}
-      />
+      <Tab.Screen name='ProfileStack' component={Profile} options={{ headerShown: false }} />
     </Tab.Navigator>
   );
   };
