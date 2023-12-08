@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import { View, TextInput, Pressable, Text, Button } from "react-native";
+import { View, TextInput, Pressable, Text, Keyboard, Alert } from "react-native";
 import { useHeaderHeight } from "@react-navigation/elements";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Ionicons from "@expo/vector-icons/Ionicons";
@@ -13,25 +13,56 @@ export const Login = ({ navigation }) => {
   const headerHeight = useHeaderHeight();
   const [username, onChangeUsername] = useState('john-doe');
   const [password, onChangePassword] = useState('testing321');
+
+  const [showPassword, setShowPassword] = useState(false);
+  const [errors, setErrors] = useState({});
+
+  const toggleShowPassword = () => {
+    setShowPassword(!showPassword);
+  }
+
+  const handleError = (error, input) => {
+    setErrors(prevState => ({...prevState, [input]: error}));
+    console.log(errors)
+  }
+
+  const validate = async () => {
+    Keyboard.dismiss();
+    let isValid = true;
+    if(!username) {
+      handleError('Please enter username', 'username');
+      isValid = false;
+    }
+    if(!password){
+      handleError('Please enter password', 'password');
+      isValid = false;
+    }
+    if(isValid){
+      handleLogin();
+    }
+  };
+
 const post = () => {
 createPost(
     "body A simple posted part two with not id")
 }
   const handleLogin = async () => {
       console.log("########", "login", "login",  "########");
-     await loginRequest(username, password).then(function (user){
-         if(user !== undefined){
-             console.log(user)
-             dispatch(login(user));
-         }
-     });
+      await loginRequest(username, password).then(function (user){
+          if(user !== undefined){
+              console.log(user)
+              dispatch(login(user));
+          }else{
+            Alert.alert('Error', 'Invalid credentials');
+          }
+      });
   };
 
   return (
     <SafeAreaView style={{ flex: 1, paddingTop: headerHeight }}>
       
       <View style={{paddingTop: 60, alignContent: "center", marginTop: 50}}>
-        <View style={{ marginBottom: 30, alignContent: "center" }}>
+        <View style={{ marginBottom: 20, alignContent: "center" }}>
           <Text
             style={{
               fontFamily: "Poppins_700Bold",
@@ -57,9 +88,11 @@ createPost(
               marginTop: 20,
             }}
             onChangeText={onChangeUsername}
+            onFocus={() => handleError(null, 'username')}
             value={username}
-            placeholder='username'
+            placeholder='Username'
           />
+          {errors.username && <Text style={{paddingLeft: 20, paddingTop: 5, color: "#ff0505"}}>{errors.username}</Text>}
         </View>
         <View style={{ alignContent: "center" }}>
           <TextInput
@@ -77,20 +110,24 @@ createPost(
               shadowRadius: 9,
               elevation: 3,
             }}
+            secureTextEntry={!showPassword}
             onChangeText={onChangePassword}
+            onFocus={()=> handleError(null, 'password')}
             value={password}
-            placeholder='password'
+            placeholder='Password'
           />
+          {errors.password && <Text style={{paddingLeft: 20, paddingTop: 5, color: "#ff0505"}}>{errors.password}</Text>}
           <Ionicons
-            name='eye-off-outline'
+            name={showPassword ? 'eye-off-outline': 'eye-outline'}
             size={24}
             color='#A100FF'
-            style={{ position: "absolute", right: 28, top: 6 }}
+            style={{ position: "absolute", right: 30, top: 10}}
+            onPress={toggleShowPassword}
           />
         </View>
         <View style={{ alignItems: "center" }}>
           <Pressable
-            onPress={async () => await handleLogin()}
+            onPress={validate}
             style={{
               width: 200,
               height: 55,
@@ -111,14 +148,16 @@ createPost(
                 fontSize: 20,
                 fontWeight: 'bold',
                 color: "#5EFF00",
-              }}>Login</Text>
+              }}> Login</Text>
             </Ionicons>
           </Pressable>
-          <Text 
-            style={{
-              marginTop: 50,
-            }}>Don't have an account? </Text>
-            <Button title="Sign up" onPress={() => {navigation.navigate("Register")}} />
+        </View>
+        <View style={{ alignItems: "center", paddingTop: 30 }}>
+          <Text style={{ fontSize: 14 }}>Don't have an account?
+            <Pressable onPress={() => {navigation.navigate("Register")}}>
+              <Text style={{ color: "#A100FF", fontWeight: "bold", fontSize: 14 }}> Sign Up.</Text>
+            </Pressable>
+          </Text>
         </View>
       </View>
     </SafeAreaView>
