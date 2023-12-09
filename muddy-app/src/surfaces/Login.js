@@ -1,18 +1,17 @@
-import React, {useEffect, useState} from "react";
+import React, { useState } from "react";
 import { View, TextInput, Pressable, Text, Keyboard, Alert } from "react-native";
 import { useHeaderHeight } from "@react-navigation/elements";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { login } from "../../reducers/userReducer"
-import { useDispatch, useSelector } from "react-redux";
-import { loginRequest, createPost } from "../services/djangoApi";
-import {catchRejection} from "@reduxjs/toolkit/src/listenerMiddleware/utils";
+import { useDispatch } from "react-redux";
+import { loginRequest } from "../services/djangoApi";
 
 export const Login = ({ navigation }) => {
   const dispatch = useDispatch();
   const headerHeight = useHeaderHeight();
-  const [username, onChangeUsername] = useState('john-doe');
-  const [password, onChangePassword] = useState('testing321');
+  const [username, onChangeUsername] = useState();
+  const [password, onChangePassword] = useState();
 
   const [showPassword, setShowPassword] = useState(false);
   const [errors, setErrors] = useState({});
@@ -42,10 +41,6 @@ export const Login = ({ navigation }) => {
     }
   };
 
-const post = () => {
-createPost(
-    "body A simple posted part two with not id")
-}
   const handleLogin = async () => {
       console.log("########", "login", "login",  "########");
       await loginRequest(username, password).then(function (user){
@@ -60,7 +55,6 @@ createPost(
 
   return (
     <SafeAreaView style={{ flex: 1, paddingTop: headerHeight }}>
-      
       <View style={{paddingTop: 60, alignContent: "center", marginTop: 50}}>
         <View style={{ marginBottom: 20, alignContent: "center" }}>
           <Text

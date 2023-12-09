@@ -1,10 +1,10 @@
-import React, {useEffect, useState} from "react";
+import React, { useState} from "react";
 import { View, TextInput, Pressable, Text, Keyboard, Alert } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import { login, register } from "../../reducers/userReducer"
-import { useDispatch, useSelector } from "react-redux";
-import { loginRequest, registerRequest } from "../services/djangoApi";
+import { register } from "../../reducers/userReducer"
+import { useDispatch } from "react-redux";
+import { registerRequest } from "../services/djangoApi";
 
 export const Register = () => {
   const dispatch = useDispatch();
@@ -73,7 +73,6 @@ export const Register = () => {
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      
       <View style={{ alignContent: "center"}}>
         <View style={{ marginBottom: 15, alignContent: "center" }}>
           <Text

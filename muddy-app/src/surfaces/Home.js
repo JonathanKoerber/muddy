@@ -1,7 +1,6 @@
 import "react-native-gesture-handler";
 import React, { useEffect } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Login } from "./Login";
 import { Feed } from "./Feed";
 import { Profile } from "./Profile";
 import { Favorites } from "./Favorites";
@@ -13,7 +12,6 @@ import { View } from "react-native";
 import { fetchLikedImages } from "../../asyncFetches";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { SafeAreaView } from "react-native-safe-area-context";
 
 const Tab = createBottomTabNavigator();
 
@@ -69,7 +67,7 @@ export const Home = () => {
         component={CreateAssignment}
         options={{
             headerShown: false,
-          tabBarIcon: ({ size }) => (
+            tabBarIcon: ({ size }) => (
             <View
               style={{
                 marginTop: -30,
@@ -93,10 +91,10 @@ export const Home = () => {
               <MaterialCommunityIcons name="brain" size={34} color="#5EFF00" />
             </View>
           ),
-        }}
+          }}
       />
       <Tab.Screen name='Favorites' component={Favorites} />
       <Tab.Screen name='ProfileStack' component={Profile} options={{ headerShown: false }} />
     </Tab.Navigator>
   );
-  };
+};

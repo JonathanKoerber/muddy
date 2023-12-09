@@ -92,18 +92,18 @@ export const EditProfile = () => {
         console.log(profileImage);
         const formData = new FormData();
         if(profileImage.length === 0){
-            console.log("Not updating the profile picture")
+          console.log("Not updating the profile picture")
         }else{
-            formData.append('avatar', {
-                name: profileImage.fileName,
-                uri: profileImage.uri,
-                type: profileImage.type,
-            });
+          formData.append('avatar', {
+              name: profileImage.fileName,
+              uri: profileImage.uri,
+              type: profileImage.type,
+          });
         }
         formData.append('first_name', firstname);
         formData.append('last_name', lastname);
         formData.append('username', username);
-        if(bio.length > 1){
+        if(bio != null && bio.length > 1){
           formData.append('bio', bio)
         }else{
           formData.append('bio', "")

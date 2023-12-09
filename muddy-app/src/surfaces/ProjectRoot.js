@@ -7,7 +7,7 @@ import { Home } from "./Home";
 import { UserDetailsModal } from "./UserDetailsModal";
 import { ImageDetailsModal } from "./ImageDetailsModal";
 import { ConversationsNavigation } from "./ConversationsNavigation";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { Worksheet} from "../components/Worksheet";
 import * as SplashScreen from "expo-splash-screen";
 
@@ -35,15 +35,18 @@ export const ProjectRoot = () =>{
   const userLoggedIn = useSelector((state) => state.user.userLoggedIn )|| false;
   const [loggedIn, setLoggedIn] = useState(false);
 
-useEffect(() => {
-  // Prevent native splash screen from autohiding
-    SplashScreen.hideAsync();
-}, []);
+  useEffect(() => {
+    // Prevent native splash screen from autohiding
+      SplashScreen.hideAsync();
+  }, []);
+
   useEffect(() => {
     setLoggedIn(userLoggedIn)
   }, [userLoggedIn]);
+
   console.log("loggedIn", loggedIn)
   console.log("userLoggedIn", userLoggedIn)
+
   let [fontsLoaded] = useFonts({
     Poppins_400Regular,
     Poppins_700Bold,
@@ -54,53 +57,55 @@ useEffect(() => {
   }
 
   return (
-        <NavigationContainer theme={MyTheme}>
-          <Stack.Navigator>
+    <NavigationContainer theme={MyTheme}>
+      <Stack.Navigator>
+        <Stack.Group>
+          {!userLoggedIn ? (
             <Stack.Group>
-              {!userLoggedIn ? (
-                <Stack.Group>
-                  <Stack.Screen
-                    name="Login"
-                    component={Login}
-                    options={{ headerShown: false }}
-                  />
-                  <Stack.Screen
-                    name="Register"
-                    component={Register}
-                    options={{ headerShow: false }}
-                  />
-                </Stack.Group>
-              ):(
-                  <>
-             <Stack.Screen
+              <Stack.Screen
+                name="Login"
+                component={Login}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="Register"
+                component={Register}
+                options={{ headerShow: false }}
+              />
+            </Stack.Group>
+          ):(
+            <>
+              <Stack.Screen
                 name="Home"
                 component={Home}
-                options={{ headerShown: false }}/>
-              {/*<Stack.Screen name="Login" component={Login}  />*/}
-              <Stack.Screen
-                    name="ConversationsNav"
-                    component={ConversationsNavigation}
-                    options={{ headerShown: false }}
-                  />
-                  </>
-            )}
-            </Stack.Group>
-            <Stack.Group screenOptions={{ presentation: "modal" }}>
-              <Stack.Screen
-                name="UserDetailsModal"
-                component={UserDetailsModal}
                 options={{ headerShown: false }}
               />
               <Stack.Screen
-                name="ImageDetailsModal"
-                component={ImageDetailsModal}
+                name="ConversationsNav"
+                component={ConversationsNavigation}
                 options={{ headerShown: false }}
               />
-              <Stack.Screen name={"Worksheet"}
-                            component={Worksheet}
-                            options={{headerShown: false}}/>
-            </Stack.Group>
-          </Stack.Navigator>
-        </NavigationContainer>   
+            </>
+        )}
+        </Stack.Group>
+        <Stack.Group screenOptions={{ presentation: "modal" }}>
+          <Stack.Screen
+            name="UserDetailsModal"
+            component={UserDetailsModal}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="ImageDetailsModal"
+            component={ImageDetailsModal}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen 
+            name={"Worksheet"}
+            component={Worksheet}
+            options={{headerShown: false}}
+          />
+        </Stack.Group>
+      </Stack.Navigator>
+    </NavigationContainer>   
   );
 }

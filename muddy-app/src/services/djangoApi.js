@@ -1,11 +1,6 @@
 import axios from 'axios';
-import CreateAuthRefreshInterceptor from "axios-auth-refresh"
 import * as SecureStore from 'expo-secure-store';
-import { useSelector, useDispatch} from "react-redux";
-import { login } from "../../reducers/userReducer";
 import {URL, POST_PATH, LOGIN_PATH, TOKEN_KEY, OCR_PATH, REFRESH_TOKEN_KEY, USER_PATH, USER_ID, REGISTER_PATH} from '../utils/constants';
-import header from "@react-navigation/stack/src/views/Header/Header";
-
 
 const djangoAPI = axios.create({
     baseURL: URL,
@@ -14,11 +9,6 @@ const djangoAPI = axios.create({
         rejectUnauthorized: false,
     }
 });
-// djangoAPI.interceptors.request.use(async (config)=>{
-//     const { access } = JSON.parse(SecureStore.getItemAsync(TOKEN_KEY));
-//     config.headers.Authorization = `Bearer ${access}`;
-//     return config;
-// })
 
 export const registerRequest = async (firstname, lastname, username, email, password) => {
 
