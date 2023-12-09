@@ -12,8 +12,11 @@ export const ViewProfile = ({ navigation }) => {
   const [profileCreation, setProfileCreation] = useState()
 
   useEffect(() => {
-    fetchData()
-  }, [])
+    const focusHandler = navigation.addListener('focus', () => {
+      fetchData()
+    });
+    return focusHandler;
+  }, [navigation])
 
   const fetchData = async () => {
     try {

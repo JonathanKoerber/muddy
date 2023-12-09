@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Image, Button, TextInput, StyleSheet, ActivityIndicator, Pressable, SafeAreaView} from 'react-native';
+import { View, Text, Image, TextInput, StyleSheet, ActivityIndicator, Pressable, SafeAreaView, Keyboard} from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import { userProfile, editUserProfile } from '../services/djangoApi';
 
-export const EditProfile = ({ navigation }) => {
+export const EditProfile = () => {
   const [profileImage, setProfileImage] = useState([]);
 
   const [isLoading, setLoading] = useState(true)
@@ -14,6 +14,33 @@ export const EditProfile = ({ navigation }) => {
   const [bio, setBio] = useState()
   const [lastupdate, setLastupdate] = useState()
   const [avatar, setAvatar] = useState()
+
+  const [errors, setErrors] = useState({});
+
+  const handleError = (error, input) => {
+    setErrors(prevState => ({...prevState, [input]: error}));
+    console.log(errors)
+  }
+
+  const validate = async () => {
+    Keyboard.dismiss();
+    let isValid = true;
+    if(!firstname) {
+      handleError('Please enter first name', 'firstname');
+      isValid = false;
+    }
+    if(!lastname){
+      handleError('Please enter last name', 'lastname');
+      isValid = false;
+    }
+    if(!username) {
+      handleError('Please enter username', 'username');
+      isValid = false;
+    }
+    if(isValid){
+      uploadImage();
+    }
+  };
 
   useEffect(() => {
     fetchData()
@@ -76,29 +103,17 @@ export const EditProfile = ({ navigation }) => {
         formData.append('first_name', firstname);
         formData.append('last_name', lastname);
         formData.append('username', username);
-        formData.append('bio', bio)
+        if(bio.length > 1){
+          formData.append('bio', bio)
+        }else{
+          formData.append('bio', "")
+        }
 
         const response = await editUserProfile(formData);
         console.log("Patch response: ", response.data)
 
-      // Handle success, navigate to another screen, etc.
     } catch (error) {
-      // Handle error
-      console.log("Error Object:", error);
-
-        if (error.response) {
-            // The request was made and the server responded with a status code
-            console.log("Response Data:", error.response.data);
-            console.log("Status Code:", error.response.status);
-            console.log("Status Text:", error.response.statusText);
-            console.log("Headers:", error.response.headers);
-        } else if (error.request) {
-            // The request was made but no response was received
-            console.log("No response received. Request details:", error.request);
-        } else {
-            // Something happened in setting up the request that triggered an Error
-            console.log("Error during request setup:", error.message);
-        }
+      console.log("Error while updating user details:", error);
     }
   };
 
@@ -117,27 +132,34 @@ export const EditProfile = ({ navigation }) => {
               }}
             />
           </View>
-          {/* {profileImage && <Image source={{ uri: profileImage.uri }} style={{ width: 200, height: 200 }} />} */}
-          <Button title="Edit Avatar" onPress={pickImage} />
+          <Pressable onPress={pickImage}>
+            <Text style={styles.imageButton}>Edit Avatar</Text>
+          </Pressable>
           <View style={styles.inputContainer}>
             <TextInput 
               value={firstname}
               style={styles.input}
               placeholder='First name'
               onChangeText={setFirstname}
+              onFocus={() => handleError(null, 'firstname')}
             />
+            {errors.firstname && <Text style={styles.errorText}>{errors.firstname}</Text>}
             <TextInput 
               value={lastname}
               style={styles.input}
               placeholder='Last name'
               onChangeText={setLastname}
+              onFocus={() => handleError(null, 'lastname')}
             />
+            {errors.lastname && <Text style={styles.errorText}>{errors.lastname}</Text>}
             <TextInput 
               value={username}
               style={styles.input}
               placeholder='Username'
               onChangeText={setUsername}
+              onFocus={() => handleError(null, 'username')}
             />
+            {errors.username && <Text style={styles.errorText}>{errors.username}</Text>}
             <TextInput 
               value={bio}
               style={styles.input}
@@ -145,8 +167,8 @@ export const EditProfile = ({ navigation }) => {
               onChangeText={setBio}
             />
             <View style={{ alignItems: "center" }}>
-                <Pressable onPress={uploadImage} style={styles.button}>
-                    <Text style={styles.buttonText}>Save Changes</Text>
+                <Pressable onPress={validate} style={styles.button}>
+                    <Text style={styles.buttonText}>Save</Text>
                 </Pressable>
             </View>
           </View>
@@ -160,7 +182,6 @@ export const EditProfile = ({ navigation }) => {
 const styles = StyleSheet.create({
     container: {
         paddingTop: 15, 
-        alignItems: "center",
     },
     imageContainer: {
         width: 140,
@@ -177,6 +198,12 @@ const styles = StyleSheet.create({
         width: 150,
         transform: [{ rotate: "45deg" }],
         alignSelf: "center",
+    },
+    imageButton: { 
+      color: "#A100FF",
+      fontSize: 16,
+      paddingTop: 10,
+      alignSelf: "center",
     },
     input: {
         fontFamily: "Poppins_400Regular",
@@ -219,5 +246,10 @@ const styles = StyleSheet.create({
     },
     inputContainer: {
         alignContent: "center"
+    },
+    errorText: {
+      paddingLeft: 20,
+      paddingTop: 5,
+      color: "#ff0505"
     }
 })
