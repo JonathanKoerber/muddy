@@ -48,6 +48,9 @@ INSTALLED_APPS = [
     "core.ocr",
 ]
 
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / "uploads"
+
 DEFAULT_AVATAR_URL = "https://gravatar.com/avatar/47f265cf9f234914e183e92908d40b44?s=400&d=robohash&r=x"
 
 MIDDLEWARE = [
