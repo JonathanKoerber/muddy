@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { Login } from "./Login";
+import { Regester } from "./Register";
 import { Home } from "./Home";
 import { UserDetailsModal } from "./UserDetailsModal";
 import { ImageDetailsModal } from "./ImageDetailsModal";
@@ -57,11 +58,18 @@ useEffect(() => {
           <Stack.Navigator>
             <Stack.Group>
               {!userLoggedIn ? (
+                <>
                 <Stack.Screen
                   name="Login"
                   component={Login}
                   options={{ headerShown: false }}
                 />
+                <Stack.Screen
+                name="Regester"
+                component={Regester}
+                options={{ headerShown: false }}
+              />
+              </>
               ):(
                   <>
              <Stack.Screen

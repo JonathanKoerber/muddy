@@ -70,12 +70,7 @@ export const Home = () => {
              <Ionicons name='chatbox-outline' color='#000000' size={size} />
           ),
         }}
-        // listeners={({ navigation }) => ({
-        //   tabPress: (e) => {
-        //     e.preventDefault();
-        //     navigation.navigate("ConversationsNav");
-        //   },
-        //}
+        
         />
       <Tab.Screen
         name='CreateAssignment'

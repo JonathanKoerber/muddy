@@ -11,7 +11,7 @@ VOLUME /var/lib/postgresql/data
 # Expose the default PostgreSQL port
 EXPOSE 5432
 #Run to reset wipe data
-COPY seed_db.sql /docker-entrypoint-initdb.d/
+# COPY seed_db.sql /docker-entrypoint-initdb.d/
 # Create a directory for the PostgreSQL data volume
 RUN mkdir -p /var/lib/postgresql/data
 

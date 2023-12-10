@@ -3,12 +3,13 @@ import { View, TextInput, Pressable, Text } from "react-native";
 import { useHeaderHeight } from "@react-navigation/elements";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { login } from "../../reducers/userReducer"
 import { useDispatch, useSelector } from "react-redux";
 import { loginRequest, createPost } from "../services/djangoApi";
 import {catchRejection} from "@reduxjs/toolkit/src/listenerMiddleware/utils";
 
-export const Login = () => {
+export const Login = ({navigation}) => {
   const dispatch = useDispatch();
   const headerHeight = useHeaderHeight();
   const [username, onChangeUsername] = useState('betty');
@@ -26,6 +27,10 @@ createPost(
          }
      });
   };
+  const handleRegister = () => {
+    //navigate to register page
+    navigation.navigate('Regester')
+  }
 
   return (
     <SafeAreaView style={{ flex: 1, paddingTop: headerHeight }}>
@@ -79,11 +84,11 @@ createPost(
         </View>
       </View>
       <Pressable
-        onPress={async () => await handleLogin()}
+        onPress={ () =>  handleRegister()}
         style={{
           position: "absolute",
           bottom: 300,
-          left: "43%",
+          left: "32%",
         }}
       >
 
@@ -102,7 +107,33 @@ createPost(
             shadowRadius: 4,
           }}
         />
-        <Ionicons name='paper-plane-outline' color='#ffffff' size={26} />
+        <MaterialCommunityIcons name="lead-pencil" size={24} color="#5EFF00" />
+        </Pressable>
+      <Pressable
+        onPress={async () => await handleLogin()}
+        style={{
+          position: "absolute",
+          bottom: 300,
+          left: "58%",
+        }}
+      >
+
+        <View
+          style={{
+            position: "absolute",
+            backgroundColor: "#000000",
+            padding: 30,
+            top: -16,
+            left: -15,
+            borderRadius: 23,
+            transform: [{ rotate: "-45deg" }],
+            shadowColor: "#000000",
+            shadowOffset: { width: 0, height: 4 },
+            shadowOpacity: 0.2,
+            shadowRadius: 4,
+          }}
+        />
+        <Ionicons name='paper-plane-outline' color='#5EFF00' size={26} />
         </Pressable>
     </SafeAreaView>
   );

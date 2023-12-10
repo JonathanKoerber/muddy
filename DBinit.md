@@ -5,7 +5,7 @@ Build the Docker image from the DBDocker file. You will need to have docker runn
 ```
 docker build -t muddy-db-image -f DBDockerfile .
 ```
-Create and start the container. W
+Create and start the container. 
 ```
 docker run --name muddy-container -d -p 5432:5432 -v postgres:/var/lib/postgresql/data muddy-db-image
 postgres

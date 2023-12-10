@@ -29,7 +29,10 @@ services:
       - db
     networks:
       - app-network
-#    command: sh -c "python manage.py wait_for_db && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    environment:
+      - AWS_PROFILE=${AWS_PROFILE:-default}
+      - AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION:-your-default-region}
+
 
   nginx:
     build:

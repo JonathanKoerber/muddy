@@ -3,7 +3,7 @@ import CreateAuthRefreshInterceptor from "axios-auth-refresh"
 import * as SecureStore from 'expo-secure-store';
 import { useSelector, useDispatch} from "react-redux";
 import { login } from "../../reducers/userReducer";
-import {URL, POST_PATH, LOGIN_PATH, TOKEN_KEY, OCR_PATH, REFRESH_TOKEN_KEY} from '../utils/constants';
+import {URL, POST_PATH, LOGIN_PATH, REGISTER_PATH, TOKEN_KEY, OCR_PATH, REFRESH_TOKEN_KEY} from '../utils/constants';
 import header from "@react-navigation/stack/src/views/Header/Header";
 
 
@@ -54,6 +54,49 @@ export const loginRequest = async (username, password) => {
         console.log("Error logging in", error);
     }
 };
+
+export const regesterRequest = async (username, password, firstName, lastName, email) => {
+    // we are working with passwrods in plain text for now 
+    // we will add encryption later
+    try {
+        const response = await djangoAPI.post(
+             REGISTER_PATH,
+            {
+                "username": username,
+                "first_name": firstName,
+                "last_name": lastName,
+                "password": password,
+                "email": email
+            },
+            {
+                headers: {
+                  'Content-Type': 'application/json',
+                  
+                }
+              }
+        );
+        console.log(response.data)
+        return response.status
+    } catch (error) {
+        console.log("Error Object:", error);
+
+        if (error.response) {
+            // The request was made and the server responded with a status code
+            console.log("Response Data:", error.response.data);
+            console.log("Status Code:", error.response.status);
+            console.log("Status Text:", error.response.statusText);
+            console.log("Headers:", error.response.headers);
+        } else if (error.request) {
+            // The request was made but no response was received
+            console.log("No response received. Request details:", error.request);
+        } else {
+            // Something happened in setting up the request that triggered an Error;
+            console.log("Error during request setup:", error.message);
+        }
+
+        console.log("Error logging in", error);
+    }
+}
 
 export const imageToWorksheet = async (userId, payload) =>{
     const accessToken = await SecureStore.getItemAsync((TOKEN_KEY))
