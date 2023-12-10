@@ -3,11 +3,13 @@ import { View, TextInput, Pressable, Text, Keyboard, Alert } from "react-native"
 import { useHeaderHeight } from "@react-navigation/elements";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { login } from "../../reducers/userReducer"
 import { useDispatch } from "react-redux";
 import { loginRequest } from "../services/djangoApi";
 
 export const Login = ({ navigation }) => {
+
   const dispatch = useDispatch();
   const headerHeight = useHeaderHeight();
   const [username, onChangeUsername] = useState();
@@ -52,6 +54,10 @@ export const Login = ({ navigation }) => {
           }
       });
   };
+  const handleRegister = () => {
+    //navigate to register page
+    navigation.navigate('Regester')
+  }
 
   return (
     <SafeAreaView style={{ flex: 1, paddingTop: headerHeight }}>

@@ -9,19 +9,16 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Install Tesseract OCR
-RUN apt-get update && apt-get install -y tesseract-ocr
-
-# Copy the application code
 COPY . .
-
+# Run migrations and collect static files during the build
+# RUN python manage.py makemigrations
+# RUN python manage.py migrate
 RUN python manage.py collectstatic --noinput
+
+#set up asw credentials
 
 # Expose the port used by the Django development server
 EXPOSE 8000
 
-# Run migrations and collect static files during the build
-CMD ["python", "manage.py", "makemigrations"]
-CMD ["python", "manage.py", "migrate"]
 # CMD ["python", "manage.py", "collectstatic", "--noinput"]
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]

@@ -8,6 +8,7 @@ export const URL = "http://"+my_ip+"/api/";
 export const URL_ADMIN = "https://"+my_ip+"/admin/";
 export const REGISTER_PATH = "auth/register/";
 export const LOGIN_PATH = "/auth/login/";
+export const REGISTER_PATH = "/auth/register/";
 export const OCR_PATH = "ocr/"
 export const POST_PATH = "post/"
 export const USER_PATH = "user/"

@@ -461,5 +461,9 @@ postgres/
 **/ios/.xcode.env.local
 /muddy-app/ios/versioned-react-native/*/ReactNative/sdks/hermes-engine/destroot
 
+.aws-config
+.aws_cred
+
 # media
 /uploads
+

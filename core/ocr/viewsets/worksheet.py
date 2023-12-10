@@ -12,7 +12,7 @@ import json
 
 
 class OCRViewSet(AbstractViewSet):
-    http_method_names = ('post', 'get', 'put', 'delete')
+    http_method_names = ['post']
     permission_classes = (UserPermission,)
     serializer_class = OCRSerializer
     parser_classes = (MultiPartParser, FormParser)
@@ -26,14 +26,12 @@ class OCRViewSet(AbstractViewSet):
         # Call the create method of the serializer to get the created Worksheet instance
         worksheet = serializer.create(serializer.validated_data)
 
-        worksheet_serializer = WorksheetSerializer(worksheet)
-
-        # Parse the JSON string in the body field
+        worksheet_serializer = OCRSerializer(worksheet)
         worksheet_data = worksheet_serializer.data
-        worksheet_data['body'] = json.loads(worksheet_data['body'])
+        
 
         # Return the response with processed text
         return Response({
-            'worksheet': worksheet_data,
+            'worksheet': json.loads(worksheet_data),
         }, status=status.HTTP_201_CREATED)
 

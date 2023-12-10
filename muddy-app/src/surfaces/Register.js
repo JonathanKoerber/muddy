@@ -1,3 +1,4 @@
+
 import React, { useState} from "react";
 import { View, TextInput, Pressable, Text, Keyboard, Alert } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -72,6 +73,7 @@ export const Register = () => {
   };
 
   return (
+
     <SafeAreaView style={{ flex: 1 }}>
       <View style={{ alignContent: "center"}}>
         <View style={{ marginBottom: 15, alignContent: "center" }}>
@@ -121,6 +123,7 @@ export const Register = () => {
               shadowRadius: 9,
               elevation: 3,
             }}
+
             onChangeText={onChangeLastname}
             onFocus={() => handleError(null, 'lastname')}
             value={lastname}
@@ -133,6 +136,7 @@ export const Register = () => {
             style={{
               fontFamily: "Poppins_400Regular",
               fontSize: 18,
+
               paddingVertical: 12,
               paddingLeft: 40,
               marginHorizontal: 17,
@@ -144,6 +148,7 @@ export const Register = () => {
               shadowRadius: 9,
               elevation: 3,
             }}
+
             onChangeText={onChangeUsername}
             onFocus={() => handleError(null, 'username')}
             value={username}
@@ -168,6 +173,7 @@ export const Register = () => {
               elevation: 3,
             }}
             onChangeText={onChangeEmail}
+
             onFocus={() => handleError(null, 'email')}
             value={email}
             placeholder='Email'

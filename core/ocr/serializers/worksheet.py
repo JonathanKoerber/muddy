@@ -1,7 +1,6 @@
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
 
-
 from core.abstract.serializers import AbstractSerializer
 from core.user.models import User
 from core.worksheet.models import Worksheet
@@ -19,6 +18,8 @@ class OCRSerializer(serializers.Serializer):
         user = User.objects.get(email=author.email)
         # Process the image file and create a Worksheet instance
 
+        # with open(image_file, 'w') as img:
+        #     img.write('orc/images/worksheet3.jpg')
         worksheet = image_to_text(user, image_file)
         print("worksheet: ", worksheet)
         # Return the created Worksheet instance
