@@ -1,0 +1,46 @@
+{
+  "expo": {
+    "name": "App1",
+    "slug": "App1",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "plugins": [[
+      "expo-build-properties",
+      {
+        "android": {
+          "minSdkVersion": 23,
+          "compileSdkVersion": 33,
+          "targetSdkVersion": 33,
+          "buildToolsVersion": "33.0.0"
+        },
+        "ios": {
+          "deploymentTarget": "13.0"
+        }
+      }
+    ], ["react-native-msal", { "androidPackageSignatureHash": "xpt2Ew8eChiJ19YcDORClSBxtJA=" }]],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "bundleIdentifier": "com.chithirai.sam.testAuth",
+      "supportsTablet": true
+    },
+    "android": {
+      "package": "com.chithirai.sam.testAuth",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      }
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    }
+  }
+}
