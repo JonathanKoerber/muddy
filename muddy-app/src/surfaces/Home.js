@@ -1,7 +1,6 @@
 import "react-native-gesture-handler";
 import React, { useEffect } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Login } from "./Login";
 import { Feed } from "./Feed";
 import { Profile } from "./Profile";
 import { Favorites } from "./Favorites";
@@ -13,7 +12,6 @@ import { View } from "react-native";
 import { fetchLikedImages } from "../../asyncFetches";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { SafeAreaView } from "react-native-safe-area-context";
 
 const Tab = createBottomTabNavigator();
 
@@ -36,9 +34,11 @@ export const Home = () => {
 
           if (route.name === "Feed") {
             iconName = focused ? "md-home" : "md-home-outline";
+          } else if (route.name === "ConversationsMain") {
+            iconName = focused ? "chatbox" : "chatbox-outline";
           } else if (route.name === "Favorites") {
             iconName = focused ? "heart" : "heart-outline";
-          } else if (route.name === "Profile") {
+          } else if (route.name === "ProfileStack") {
             iconName = focused ? "person-circle" : "person-circle-outline";
           }
 
@@ -61,23 +61,13 @@ export const Home = () => {
       })}
     >
       <Tab.Screen name='Feed' component={Feed} />
-      <Tab.Screen
-        name='ConversationsMain'
-        component={ConversationsBase}
-        options={{
-          tabBarIcon: ({ size }) => (
-           // <MaterialIcons name="assignment" size={24} color="#A100FF" />
-             <Ionicons name='chatbox-outline' color='#000000' size={size} />
-          ),
-        }}
-        
-        />
+      <Tab.Screen name='ConversationsMain' component={ConversationsBase} />
       <Tab.Screen
         name='CreateAssignment'
         component={CreateAssignment}
         options={{
             headerShown: false,
-          tabBarIcon: ({ size }) => (
+            tabBarIcon: ({ size }) => (
             <View
               style={{
                 marginTop: -30,
@@ -101,14 +91,10 @@ export const Home = () => {
               <MaterialCommunityIcons name="brain" size={34} color="#5EFF00" />
             </View>
           ),
-        }}
+          }}
       />
       <Tab.Screen name='Favorites' component={Favorites} />
-      <Tab.Screen
-        name='Profile'
-        component={Profile}
-        options={{ headerShown: false }}
-      />
+      <Tab.Screen name='ProfileStack' component={Profile} options={{ headerShown: false }} />
     </Tab.Navigator>
   );
-  };
+};
