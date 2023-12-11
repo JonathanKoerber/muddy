@@ -7,8 +7,8 @@ import {useSelector} from "react-redux";
 
 export const ListOfWorksheets = ({ navigation }) => {
     const [loading, setLoading] = useState(true);
-    const listOfWorksheets = useSelector((state) => state.worksheets)| [];
-    //const listOfWorksheets = WORKSHEETS;
+    //const listOfWorksheets = useSelector((state) => state.worksheets)| [];
+    const listOfWorksheets = WORKSHEETS;
 
     useEffect(() => {
         if (listOfWorksheets) {

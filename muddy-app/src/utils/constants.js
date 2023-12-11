@@ -2,11 +2,10 @@ export const requestBase = "https://packtpublishing.github.io/Simplifying-State-
 export const TOKEN_KEY = "jwt-token";
 export const REFRESH_TOKEN_KEY = "refresh-token";
 export const USER_ID = "user-id"
-const my_ip = "192.168.1.18:8000"
-//const my_ip = "10.0.2.2";
-export const URL = "http://"+my_ip+"/api/";
+const my_ip = "https://318c-97-113-159-210.ngrok-free.app"
+
+export const URL = my_ip+"/api/";
 export const URL_ADMIN = "https://"+my_ip+"/admin/";
-export const REGISTER_PATH = "auth/register/";
 export const LOGIN_PATH = "/auth/login/";
 export const REGISTER_PATH = "/auth/register/";
 export const OCR_PATH = "ocr/"

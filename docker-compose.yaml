@@ -23,16 +23,19 @@ services:
     volumes:
       - .:/app
       - ./.secret:/app/.secret
+
     ports:
       - "8000:8000"
     depends_on:
       - db
     networks:
       - app-network
+    env_file:
+      - .env
     environment:
-      - AWS_PROFILE=${AWS_PROFILE:-default}
-      - AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION:-your-default-region}
-
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+      - AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION}
 
   nginx:
     build:

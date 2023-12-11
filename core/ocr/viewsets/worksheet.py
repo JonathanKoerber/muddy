@@ -29,7 +29,7 @@ class OCRViewSet(AbstractViewSet):
         worksheet_serializer = OCRSerializer(worksheet)
         worksheet_data = worksheet_serializer.data
         
-
+        print("##"*10, "OCR worksheets ViewSet", "##"*10)
         # Return the response with processed text
         return Response({
             'worksheet': json.loads(worksheet_data),
