@@ -60,7 +60,7 @@ export const Home = () => {
         },
       })}
     >
-      <Tab.Screen name='Feed' component={Feed} />
+      <Tab.Screen name='Worksheets' component={Feed} />
       <Tab.Screen name='ConversationsMain' component={ConversationsBase} />
       <Tab.Screen
         name='CreateAssignment'

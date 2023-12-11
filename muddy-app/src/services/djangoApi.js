@@ -6,12 +6,16 @@ import {URL, POST_PATH, LOGIN_PATH, TOKEN_KEY, OCR_PATH, REFRESH_TOKEN_KEY, USER
 const djangoAPI = axios.create({
     baseURL: URL,
     timeout: 10000,
-    httpsAgent: {
-        rejectUnauthorized: false,
-    }
+    // httpsAgent: {
+    //     rejectUnauthorized: false,
+    // }
 });
              
-export const registerRequest = async (firstname, lastname, username, email, password) => {
+export const registerRequest = async (firstname, 
+                                        lastname, 
+                                        username, 
+                                        email, 
+                                        password) => {
  // we are working with passwrods in plain text for now 
     // we will add encryption later
     try {
@@ -27,7 +31,6 @@ export const registerRequest = async (firstname, lastname, username, email, pass
             'Content-Type': 'application/json',      
                 }
               });
-
         console.log('refresh', response.data.refresh)
         await SecureStore.setItemAsync(REFRESH_TOKEN_KEY, response.data.refresh);
         console.log("access", response.data.access)

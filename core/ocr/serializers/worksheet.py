@@ -16,13 +16,10 @@ class OCRSerializer(serializers.Serializer):
         author = validated_data['author']
         image_file = validated_data['image']
         user = User.objects.get(email=author.email)
-        # Process the image file and create a Worksheet instance
-
-        # with open(image_file, 'w') as img:
-        #     img.write('orc/images/worksheet3.jpg')
+        
         worksheet = image_to_text(user, image_file)
-        print("worksheet: ", worksheet)
-        # Return the created Worksheet instance
+        print("##"*10, "orc_serializer worksheet: ", "##"*10)
+      
         return worksheet
 
     class Meta:
